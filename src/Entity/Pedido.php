@@ -32,9 +32,13 @@ class Pedido {
     /** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/    
     private $historicos;
 
+    /** @ManyToMany(targetEntity="produto", mappedBy="pedidos")  */
+    private $produtos;
+
     public function __construct()
     {
         $this->historicos = new ArrayCollection();        
+        $this->produtos = new ArrayCollection();
     }
 
     public function getId()
@@ -79,6 +83,16 @@ class Pedido {
         $this->data = $data;
     }
 
+    public function addProdutos(Produto $produto): self
+    {
+        $this->produtos->add($produto);
+        return $this;
+    }
+
+    public function getProdutos(): Collection {
+        return $this->produtos;
+    }
+
     public function addHistorico(Historico $historico) : self 
     {
         $this->historicos->add($historico);
@@ -89,7 +103,7 @@ class Pedido {
     {
         return $this->historicos;
     }
-
+    
     public function getUltimoHistorico() : Historico
     {
         foreach ($this->historicos as $historico);

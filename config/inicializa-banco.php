@@ -1,5 +1,7 @@
 <?php
 
+exit();
+
 require_once(__DIR__ . '/insere-cliente.php');
 require_once(__DIR__ . './insere-produto.php');
 require_once(__DIR__ . './insere-contrato.php');
