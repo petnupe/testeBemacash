@@ -1,0 +1,33 @@
+<?php
+
+use Bemacash\Entity\Historico;
+use Bemacash\Entity\Pedido;
+use Bemacash\Entity\Status;
+use Bemacash\Helper\EntityManagerFactory;
+
+echo PHP_EOL.'Inicialzando historicos'.PHP_EOL;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$entityManager = (new EntityManagerFactory)->getEntityManager();
+$repoPedidos = $entityManager->getRepository(Pedido::class);
+$repoStatus  = $entityManager->getRepository(Status::class);
+
+$pedidos = $repoPedidos->findAll();
+
+foreach ($pedidos as $pedido) {
+    for($i = 1; $i < 5; $i++) {
+        $Historico = new Historico();
+        $Historico->setStatus($repoStatus->find(rand(1, 4)));
+        $Historico->setPedido($pedido);
+        
+        $data = new DateTime(date('d-m-Y'));
+        $Historico->setData($data);
+        
+        echo $Historico->getPedido()->getId().PHP_EOL;
+        $Historico->getPedido()->addHistorico($Historico);
+        
+        $entityManager->persist($Historico);
+        $entityManager->flush();
+    }
+}

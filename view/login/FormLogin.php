@@ -9,6 +9,6 @@
             <label for="senha">Senha</label>
             <input type="password" id="senha" name="senha" class="form-control" value="123456">
         </div>
-        <button class="btn btn-primary btn-block">Salvar</button>
+        <button class="btn btn-primary btn-block">Entrar</button>
     </form>
 <?php include __DIR__ . '/../fim-html.php'; ?>

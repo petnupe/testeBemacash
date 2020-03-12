@@ -2,12 +2,14 @@
 
 namespace Bemacash\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @Entity 
  */
 
-class Pedido 
-{
+class Pedido {
 
  /**
  * @Id
@@ -20,13 +22,20 @@ class Pedido
     private $cliente;
 
     /** @Column(type="date") */
-    private $data_pedido;
-    
-    /** @Column(type="date") */
-    private $data_status;
-        
-    /** @Column(type="string") */
-    private $status;
+    private $data;
+
+    /**
+     * @ManyToOne(targetEntity="contrato")
+     */
+    private $contrato;
+
+    /** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/    
+    private $historicos;
+
+    public function __construct()
+    {
+        $this->historicos = new ArrayCollection();        
+    }
 
     public function getId()
     {
@@ -39,7 +48,7 @@ class Pedido
         return $this->id;
     }
 
-    public function getCliente()
+    public function getCliente() : Cliente
     {
         return $this->cliente;
     }
@@ -50,31 +59,40 @@ class Pedido
         return $this;
     }
 
-    public function getData_pedido()
+    public function getContrato() : Contrato
     {
-        return $this->data_pedido;
+        return $this->contrato;
     }
 
-    public function setData_pedido($data_pedido){
-        $this->data_pedido = $data_pedido;
-    }
-
-    public function getData_status(){
-        return $this->data_status;
-    }
-
-    public function setData_status($data_status)
+    public function setContrato($contrato) : self 
     {
-        $this->data_status = $data_status;
+        $this->contrato = $contrato;
+        return $this;
     }
 
-    public function getStatus()
+    public function getData()
     {
-        return $this->status;
+        return $this->data;
     }
 
-    public function setStatus($status)
+    public function setData($data){
+        $this->data = $data;
+    }
+
+    public function addHistorico(Historico $historico) : self 
     {
-        $this->status = $status;
+        $this->historicos->add($historico);
+        return $this;
+    }
+
+    public function getHistoricos() : Collection
+    {
+        return $this->historicos;
+    }
+
+    public function getUltimoHistorico() : Historico
+    {
+        foreach ($this->historicos as $historico);
+        return $historico;
     }
 }

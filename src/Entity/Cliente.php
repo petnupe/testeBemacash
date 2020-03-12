@@ -56,7 +56,8 @@ use Doctrine\Common\Collections\Collection;
         return $this->email;
     }
 
-    public function setEmail($email) : self {
+    public function setEmail($email) : self 
+    {
         $this->email = $email;
         return $this;
     }

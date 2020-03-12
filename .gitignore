@@ -1,1 +1,7 @@
 /vendor
+/var/App
+/var/Data
+/var/Other
+/var/settings
+/var/help.html
+/var/SQLiteDatabaseBrowserPortable.exe

@@ -9,5 +9,7 @@
 <body>
 <div class="container-fluid">
     <div class="jumbotron">
-        <h1><?= $titulo; ?></h1>
+        <h1>
+           <!-- <?= $titulo; ?> -->
+        </h1>
     </div>
