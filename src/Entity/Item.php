@@ -6,7 +6,7 @@ namespace Bemacash\Entity;
  * @Entity
  */
 
-class Historico 
+class Item 
 {
     
     /**
@@ -22,12 +22,14 @@ class Historico
     private $pedido;
 
     /**
-     * @ManyToOne(targetEntity="status")
+     * @ManyToOne(targetEntity="produto")
      */
-    private $status;
+    private $produto;
 
-    /** @Column(type="date") */
-    private $data;
+    /**
+     * @Column(type="integer")
+     */
+    private $quantidade;
 
     public function getId() : int
     {
@@ -45,25 +47,25 @@ class Historico
         return $this;
 	}
 
-    public function getStatus(): Status
+    public function getProduto(): Produto
     {
-		return $this->status;
+		return $this->produto;
 	}
 
-    public function setStatus($status) : self
+    public function setProduto($produto) : self
     {
-        $this->status = $status;
+        $this->produto = $produto;
         return $this;
-	}
-
-    public function getData()
+    }
+    
+    public function getQuantidade() : int 
     {
-        return $this->data->format('d/m/Y');
-	}
+        return $this->quantidade;
+    }
 
-    public function setData($data) : self
+    public function setQuantidade  (int $quantidade) : self
     {
-        $this->data = $data;
+        $this->quantidade = $quantidade;
         return $this;
-	}
+    }
 }

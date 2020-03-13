@@ -28,13 +28,10 @@ class Produto
      */
     private $valor;
 
-    /** @ManyToMany(targetEntity="pedido", inversedBy="produtos")  */
-    private $pedidos;
-
-    public function __construct()
-    {
-      $this->produtos = new ArrayCollection();
-    }
+    /**
+     * @Column(type="string")
+     */
+    private $icone;
 
     public function getId() : int
     {
@@ -63,14 +60,14 @@ class Produto
       return $this;
     }
 
-    public function addPedidos(Pedido $pedido): self 
+    public function setIcone($icone) : self 
     {
-      $this->pedidos->add($pedido);
-      return $this;
+        $this->icone = $icone;
+        return $this;
     }
 
-    public function getPedidos () : Collection 
+    public function getIcone() : string
     {
-      return $this->pedidos;
+      return $this->icone;
     }
 }

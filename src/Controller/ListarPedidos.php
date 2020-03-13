@@ -17,9 +17,18 @@ class ListarPedidos implements InterfaceControladorRequisicao
 
     public function processaRequisicao() : void
     {
-        $pedidosList = $this->repositorioPedidos->findBy(['cliente' => $_GET['id']]);
-        $titulo = "Pedidos de: " . $pedidosList[0]->getCliente()->getNome();
-        require __DIR__ . '/../../view/pedidos/ListarPedidos.php';
-        exit();
+        
+        if(@$_GET['id']) {
+            $pedidosList = $this->repositorioPedidos->findBy(['cliente' => $_GET['id']]);
+            $titulo = "Pedidos de: " . $pedidosList[0]->getCliente()->getNome();
+            require __DIR__ . '/../../view/pedidos/ListarPedidos.php';
+            exit();
+        } else {
+            $titulo = 'Erro';
+            $erro   = 'Ops! Alguma coisa saiu errado!' ;
+            require __DIR__ . '/../../view/erro.php';
+        }
+        
+        
     }
 }

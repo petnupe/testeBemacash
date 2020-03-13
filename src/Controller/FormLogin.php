@@ -11,6 +11,4 @@ class FormLogin implements InterfaceControladorRequisicao{
        $titulo = 'Login';
         require __DIR__ . '/../../view/login/FormLogin.php';
     }
-
-
 }

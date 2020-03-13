@@ -16,12 +16,22 @@ $produtos = [
     "MP-4200 TH ETHERNET BR 10 10000830"
 ];
 
+$icones = [
+        '<i class="fas fa-file-signature"></i>',
+        '<i class="fas fa-tablet-alt"></i>',
+        '<i class="fas fa-vote-yea"></i>',
+        '<i class="fas fa-inbox"></i>',
+        '<i class="fas fa-file-signature"></i>',
+        '<i class="fas fa-print"></i>'
+];
+
+$i = 0;
 foreach($produtos as $produto) {
     //echo $produto.PHP_EOL;
     $Produto = new Produto();
     $Produto->setDescricao($produto);
-    
-    $valor = number_format((rand(10, 1000) / 3), 2, '.','');
+    $Produto->setIcone($icones[$i++]);
+    $valor = number_format((rand(10, 100) / 3), 2, '.','');
 
     echo ' -> ' .$valor.' - ';
     $Produto->setValor($valor);

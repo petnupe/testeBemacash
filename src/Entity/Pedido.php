@@ -32,13 +32,13 @@ class Pedido {
     /** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/    
     private $historicos;
 
-    /** @ManyToMany(targetEntity="produto", mappedBy="pedidos")  */
-    private $produtos;
+    /** @OneToMany(targetEntity="item", mappedBy="pedido", cascade={"remove", "persist"})*/    
+    private $itens;
 
     public function __construct()
     {
-        $this->historicos = new ArrayCollection();        
-        $this->produtos = new ArrayCollection();
+        $this->historicos = new ArrayCollection();
+        $this->itens      = new ArrayCollection();
     }
 
     public function getId()
@@ -76,21 +76,11 @@ class Pedido {
 
     public function getData()
     {
-        return $this->data;
+        return $this->data->format('d/m/Y');
     }
 
     public function setData($data){
         $this->data = $data;
-    }
-
-    public function addProdutos(Produto $produto): self
-    {
-        $this->produtos->add($produto);
-        return $this;
-    }
-
-    public function getProdutos(): Collection {
-        return $this->produtos;
     }
 
     public function addHistorico(Historico $historico) : self 
@@ -109,4 +99,26 @@ class Pedido {
         foreach ($this->historicos as $historico);
         return $historico;
     }
-}
+
+    public function addItem(Item $item) : self 
+    {
+        $this->itens->add($item);
+        return $this;
+    }
+
+    public function getItens() : Collection
+    {
+        return $this->itens;
+    }
+
+    public function valorTotalPedido() {
+        $total = 0.00;
+
+        foreach ($this->getItens() as $item) {
+            $total += $item->getProduto()->getValor() * $item->getQuantidade();
+        }
+
+        return $total;
+    }
+
+ }

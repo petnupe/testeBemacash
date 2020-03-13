@@ -12,7 +12,7 @@ $entityManager = (new EntityManagerFactory)->getEntityManager();
 $repoCliente  = $entityManager->getRepository(Cliente::class);
 $repoContrato = $entityManager->getRepository(Contrato::class);
 
-for($i = 1; $i < 10; $i++) {
+for($i = 1; $i < 5; $i++) {
 
     $id = 1;
 
