@@ -6,22 +6,22 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
 
-class EntityManagerFactory 
+class EntityManagerFactory
 {
-    public function getEntityManager(): EntityManagerInterface
-    {
-        
-        $rootDir = __DIR__ . '/../../';
+	public function getEntityManager(): EntityManagerInterface
+	{
 
-        $config = Setup::createAnnotationMetadataConfiguration(
-            [$rootDir . '/src'],
-            false
-        );
-       $connection = [
-           'driver' => 'pdo_sqlite',
-           'path'   => $rootDir . 'var/data/banco.sqlite'
-       ];
+		$rootDir = __DIR__ . '/../../';
 
-        return EntityManager::create($connection, $config);
-    }
+		$config = Setup::createAnnotationMetadataConfiguration(
+		[$rootDir . '/src'],
+		false
+		);
+		$connection = [
+		'driver' => 'pdo_sqlite',
+		'path'   => $rootDir . 'var/data/banco.sqlite'
+		];
+
+		return EntityManager::create($connection, $config);
+	}
 }

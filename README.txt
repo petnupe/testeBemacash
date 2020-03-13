@@ -7,7 +7,7 @@ Objetivo:
 Listar os pedidos dos clientes bem como os produtos, contratos e licenças por pedido.
 
 Requisitos:
-PHP7
+PHP7.2 ou superior
 Composer
 SQLite3
 

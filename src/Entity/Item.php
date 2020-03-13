@@ -6,66 +6,66 @@ namespace Bemacash\Entity;
  * @Entity
  */
 
-class Item 
+class Item
 {
-    
-    /**
+
+	/**
      * @Id
      * @GeneratedValue
      * @Column (type="integer")
      */
-    private $id;
-    
-    /**
+	private $id;
+
+	/**
      * @ManyToOne(targetEntity="pedido")
      */
-    private $pedido;
+	private $pedido;
 
-    /**
+	/**
      * @ManyToOne(targetEntity="produto")
      */
-    private $produto;
+	private $produto;
 
-    /**
+	/**
      * @Column(type="integer")
      */
-    private $quantidade;
+	private $quantidade;
 
-    public function getId() : int
-    {
+	public function getId() : int
+	{
 		return $this->id;
 	}
 
-    public function getPedido() : Pedido
-    {
+	public function getPedido() : Pedido
+	{
 		return $this->pedido;
 	}
 
-    public function setPedido(Pedido $pedido) : self
-    {
-        $this->pedido = $pedido;
-        return $this;
+	public function setPedido(Pedido $pedido) : self
+	{
+		$this->pedido = $pedido;
+		return $this;
 	}
 
-    public function getProduto(): Produto
-    {
+	public function getProduto(): Produto
+	{
 		return $this->produto;
 	}
 
-    public function setProduto(Produto $produto) : self
-    {
-        $this->produto = $produto;
-        return $this;
-    }
-    
-    public function getQuantidade() : int 
-    {
-        return $this->quantidade;
-    }
+	public function setProduto(Produto $produto) : self
+	{
+		$this->produto = $produto;
+		return $this;
+	}
 
-    public function setQuantidade  (int $quantidade) : self
-    {
-        $this->quantidade = $quantidade;
-        return $this;
-    }
+	public function getQuantidade() : int
+	{
+		return $this->quantidade;
+	}
+
+	public function setQuantidade  (int $quantidade) : self
+	{
+		$this->quantidade = $quantidade;
+		return $this;
+	}
 }

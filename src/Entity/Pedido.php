@@ -11,112 +11,112 @@ use Doctrine\Common\Collections\Collection;
 
 class Pedido {
 
- /**
+	/**
  * @Id
  * @GeneratedValue
  * @Column(type="integer")
  */
-    private $id;
+	private $id;
 
-    /** @ManyToOne(targetEntity="cliente") */
-    private $cliente;
+	/** @ManyToOne(targetEntity="cliente") */
+	private $cliente;
 
-    /** @Column(type="date") */
-    private $data;
+	/** @Column(type="date") */
+	private $data;
 
-    /**
+	/**
      * @ManyToOne(targetEntity="contrato")
      */
-    private $contrato;
+	private $contrato;
 
-    /** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/    
-    private $historicos;
+	/** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/
+	private $historicos;
 
-    /** @OneToMany(targetEntity="item", mappedBy="pedido", cascade={"remove", "persist"})*/    
-    private $itens;
+	/** @OneToMany(targetEntity="item", mappedBy="pedido", cascade={"remove", "persist"})*/
+	private $itens;
 
-    public function __construct()
-    {
-        $this->historicos = new ArrayCollection();
-        $this->itens      = new ArrayCollection();
-    }
+	public function __construct()
+	{
+		$this->historicos = new ArrayCollection();
+		$this->itens      = new ArrayCollection();
+	}
 
-    public function getId()
-    {
-        return $this->id;
-    }
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    public function setId($id) : self
-    {
-        $this->id = $id;
-        return $this->id;
-    }
+	public function setId($id) : self
+	{
+		$this->id = $id;
+		return $this->id;
+	}
 
-    public function getCliente() : Cliente
-    {
-        return $this->cliente;
-    }
+	public function getCliente() : Cliente
+	{
+		return $this->cliente;
+	}
 
-    public function setCliente(Cliente $cliente)
-    {
-        $this->cliente = $cliente;
-        return $this;
-    }
+	public function setCliente(Cliente $cliente)
+	{
+		$this->cliente = $cliente;
+		return $this;
+	}
 
-    public function getContrato() : Contrato
-    {
-        return $this->contrato;
-    }
+	public function getContrato() : Contrato
+	{
+		return $this->contrato;
+	}
 
-    public function setContrato(Contrato $contrato) : self 
-    {
-        $this->contrato = $contrato;
-        return $this;
-    }
+	public function setContrato(Contrato $contrato) : self
+	{
+		$this->contrato = $contrato;
+		return $this;
+	}
 
-    public function getData()
-    {
-        return $this->data->format('d/m/Y');
-    }
+	public function getData()
+	{
+		return $this->data->format('d/m/Y');
+	}
 
-    public function setData($data){
-        $this->data = $data;
-    }
+	public function setData($data){
+		$this->data = $data;
+	}
 
-    public function addHistorico(Historico $historico) : self 
-    {
-        $this->historicos->add($historico);
-        return $this;
-    }
+	public function addHistorico(Historico $historico) : self
+	{
+		$this->historicos->add($historico);
+		return $this;
+	}
 
-    public function getHistoricos() : Collection
-    {
-        return $this->historicos;
-    }
-    
-    public function getUltimoHistorico() : Historico
-    {
-        foreach ($this->historicos as $historico);
-        return $historico;
-    }
+	public function getHistoricos() : Collection
+	{
+		return $this->historicos;
+	}
 
-    public function addItem(Item $item) : self 
-    {
-        $this->itens->add($item);
-        return $this;
-    }
+	public function getUltimoHistorico() : Historico
+	{
+		foreach ($this->historicos as $historico);
+		return $historico;
+	}
 
-    public function getItens() : Collection
-    {
-        return $this->itens;
-    }
+	public function addItem(Item $item) : self
+	{
+		$this->itens->add($item);
+		return $this;
+	}
 
-    public function valorTotalPedido() : float
-    {
-        $total = 0.00;
-        foreach ($this->getItens() as $item) {
-            $total += $item->getProduto()->getValor() * $item->getQuantidade();
-        }
-        return $total;
-    }
- }
+	public function getItens() : Collection
+	{
+		return $this->itens;
+	}
+
+	public function valorTotalPedido() : float
+	{
+		$total = 0.00;
+		foreach ($this->getItens() as $item) {
+			$total += $item->getProduto()->getValor() * $item->getQuantidade();
+		}
+		return $total;
+	}
+}
