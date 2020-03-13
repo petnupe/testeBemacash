@@ -43,7 +43,7 @@ class Produto
 		  return $this->descricao;
 	  } 
 
-    public function setDescricao($descricao) : self
+    public function setDescricao(string $descricao) : self
     {
         $this->descricao = $descricao;
         return $this;
@@ -60,7 +60,7 @@ class Produto
       return $this;
     }
 
-    public function setIcone($icone) : self 
+    public function setIcone(string $icone) : self 
     {
         $this->icone = $icone;
         return $this;

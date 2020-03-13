@@ -57,7 +57,7 @@ class Pedido {
         return $this->cliente;
     }
 
-    public function setCliente($cliente)
+    public function setCliente(Cliente $cliente)
     {
         $this->cliente = $cliente;
         return $this;
@@ -68,7 +68,7 @@ class Pedido {
         return $this->contrato;
     }
 
-    public function setContrato($contrato) : self 
+    public function setContrato(Contrato $contrato) : self 
     {
         $this->contrato = $contrato;
         return $this;
@@ -111,14 +111,12 @@ class Pedido {
         return $this->itens;
     }
 
-    public function valorTotalPedido() {
+    public function valorTotalPedido() : float
+    {
         $total = 0.00;
-
         foreach ($this->getItens() as $item) {
             $total += $item->getProduto()->getValor() * $item->getQuantidade();
         }
-
         return $total;
     }
-
  }

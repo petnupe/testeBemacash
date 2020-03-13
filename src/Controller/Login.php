@@ -21,12 +21,17 @@ class Login implements InterfaceControladorRequisicao{
         $email = isset($_POST['email']) ? $_POST['email'] : null;
         $Cliente = $this->repositorioDeClientes->findOneBy(['email' => $email]);
 
-        if($Cliente->verificaSenha($_POST['senha'])) {
-            header('Location: ./ListarPedidos?id='.$Cliente->getId());
-        } else {
-            $titulo = 'Erro';
-            $erro   = 'E-mail ou senha incorretos!' ;
-            require __DIR__ . '/../../view/erro.php';
+        $erro = null;
+
+        if($Cliente) {
+            if($Cliente->verificaSenha($_POST['senha'])) {
+                header('Location: ./ListarPedidos?id='.$Cliente->getId());
+            }
         }
+
+        $titulo = 'Erro';
+        $erro   = 'E-mail ou senha incorretos!' ;
+        require __DIR__ . '/../../view/erro.php';
+        
     }
 }

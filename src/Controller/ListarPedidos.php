@@ -10,7 +10,8 @@ class ListarPedidos implements InterfaceControladorRequisicao
 {
     private $repositorioPedidos;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $entityManager = (new EntityManagerFactory())->getEntityManager();
         $this->repositorioPedidos = $entityManager->getRepository(Pedido::class);
     }
@@ -20,15 +21,15 @@ class ListarPedidos implements InterfaceControladorRequisicao
         
         if(@$_GET['id']) {
             $pedidosList = $this->repositorioPedidos->findBy(['cliente' => $_GET['id']]);
-            $titulo = "Pedidos de: " . $pedidosList[0]->getCliente()->getNome();
-            require __DIR__ . '/../../view/pedidos/ListarPedidos.php';
-            exit();
-        } else {
+            
+            if($pedidosList) {
+                $titulo = "Pedidos de: " . $pedidosList[0]->getCliente()->getNome();
+                require __DIR__ . '/../../view/pedidos/ListarPedidos.php';
+                exit();
+            } 
+        }       
             $titulo = 'Erro';
             $erro   = 'Ops! Alguma coisa saiu errado!' ;
             require __DIR__ . '/../../view/erro.php';
-        }
-        
-        
     }
 }

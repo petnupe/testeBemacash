@@ -22,17 +22,17 @@ class Status
 
     public function getId() : int
     {
-		return $this->id;
-	}
+		  return $this->id;
+	  }
 
     public function getDescricao() : string
     {
-		return $this->descricao;
-	}
+      return $this->descricao;
+    }
 
-    public function setDescricao($descricao) : self
+    public function setDescricao(string $descricao) : self
     {
         $this->descricao = $descricao;
         return $this;
-	}
+	  }
 }

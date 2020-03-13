@@ -41,7 +41,7 @@ class Item
 		return $this->pedido;
 	}
 
-    public function setPedido($pedido) : self
+    public function setPedido(Pedido $pedido) : self
     {
         $this->pedido = $pedido;
         return $this;
@@ -52,7 +52,7 @@ class Item
 		return $this->produto;
 	}
 
-    public function setProduto($produto) : self
+    public function setProduto(Produto $produto) : self
     {
         $this->produto = $produto;
         return $this;
