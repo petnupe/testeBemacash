@@ -1,12 +1,11 @@
 Teste desenvolvimento Bemacash
-
-Este software foi desenvolvido com a intenção de analisar minhas qualidades 
-como desenvolvedor.
+Este software foi desenvolvido para analise das competencias como desenvolvedor baseado em uma história real de usuário
 
 Objetivo:
-Listar os pedidos dos clientes bem como os produtos, contratos e licenças por pedido.
+Listar os pedidos dos clientes bem como os produtos e detalhes, contratos e licenças por pedido.
 
 Requisitos:
+Acesso a internet para utilizaçao das bibliotecas externas.
 PHP7.2 ou superior
 Composer
 SQLite3
@@ -29,4 +28,6 @@ Em config/routes estão as classes correspondentes a cada rota.
 A interfaceControladoraDeRequisicao garante que todos os controllers impelemtarão o metodo processa requisiçao 
 que realiza as verificações e gerenciamento das Entidades (com EntityManager) e devolve para a sua view correspondente.
 
-Toda a relação com a base de dados foi realizada através do mapeamente das Entidades com Doctrine abstraindo o banco de dados.
+A exibição dos detalhes de cada pedido não recarrega a página sendo utilizado Ajax para tal.
+
+Toda a relação com a base de dados foi realizada através do mapeamento das Entidades com Doctrine abstraindo o banco de dados.

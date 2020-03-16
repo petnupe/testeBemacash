@@ -56,6 +56,10 @@ class Produto
 
 	public function setValor(float $valor) : self
 	{
+		if($valor <= 0.00) {
+			return false;
+		}		
+
 		$this->valor = $valor;
 		return $this;
 	}

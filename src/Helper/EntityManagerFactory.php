@@ -1,7 +1,6 @@
 <?php
 
 namespace Bemacash\Helper;
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
@@ -15,7 +14,7 @@ class EntityManagerFactory
 
 		$config = Setup::createAnnotationMetadataConfiguration(
 		[$rootDir . '/src'],
-		true
+		false
 		);
 		$connection = [
 		'driver' => 'pdo_sqlite',

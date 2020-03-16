@@ -2,6 +2,7 @@
 
 namespace Bemacash\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -79,8 +80,15 @@ class Pedido {
 		return $this->data->format('d/m/Y');
 	}
 
-	public function setData($data){
+	public function setData($data) : self
+	{
+		$hoje = new DateTime(date('d-m-Y'));
+		if($data > $hoje) {
+			return false;
+		}
+		
 		$this->data = $data;
+		return $this;
 	}
 
 	public function addHistorico(Historico $historico) : self
