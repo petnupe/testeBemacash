@@ -18,8 +18,7 @@ class ClienteTest extends TestCase {
           $result = $Cliente->setPassword('123456') instanceof Cliente;
           self::assertTrue($result);
      }
-
-     
+    
      public function testTamanhoCnpjCliente()
      {
           $Cliente = new Cliente();

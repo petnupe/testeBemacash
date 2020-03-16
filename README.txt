@@ -5,7 +5,7 @@ Objetivo:
 Listar os pedidos dos clientes bem como os produtos e detalhes, contratos e licenças por pedido.
 
 Requisitos:
-Acesso a internet para utilizaçao das bibliotecas externas.
+Acesso a internet para utilizaçao das bibliotecas externas (Bootstrap, FontAwsome e Jquery).
 PHP7.2 ou superior
 Composer
 SQLite3
@@ -28,6 +28,11 @@ Em config/routes estão as classes correspondentes a cada rota.
 A interfaceControladoraDeRequisicao garante que todos os controllers impelemtarão o metodo processa requisiçao 
 que realiza as verificações e gerenciamento das Entidades (com EntityManager) e devolve para a sua view correspondente.
 
+AJAX
 A exibição dos detalhes de cada pedido não recarrega a página sendo utilizado Ajax para tal.
 
+ORM
 Toda a relação com a base de dados foi realizada através do mapeamento das Entidades com Doctrine abstraindo o banco de dados.
+
+PHPUNIT
+Foram criados casos de testes básicos, com phpunit, para validar algumas situações pertinentes as Entidades.
