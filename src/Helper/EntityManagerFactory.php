@@ -15,7 +15,7 @@ class EntityManagerFactory
 
 		$config = Setup::createAnnotationMetadataConfiguration(
 		[$rootDir . '/src'],
-		false
+		true
 		);
 		$connection = [
 		'driver' => 'pdo_sqlite',

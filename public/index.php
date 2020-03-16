@@ -1,8 +1,10 @@
 <?php
 
+ini_set('display_errors',1 );error_reporting(E_ALL);
+
 require __DIR__ . '/../vendor/autoload.php';
 
-use Beacash\Controller\InterfaceControladorRequisicao;
+use Bemacash\Controller\InterfaceControladorRequisicao;
 
 $caminho = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : null;
 $rotas = require __DIR__ . '/../config/routes.php';
