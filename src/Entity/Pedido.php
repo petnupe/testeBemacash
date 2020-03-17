@@ -5,74 +5,67 @@ namespace Bemacash\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
 /**
- * @Entity 
+ * @Entity
  */
+class Pedido 
+{
+     /**
+      * @Id
+      * @Column(type="integer")
+      * @GeneratedValue(strategy="AUTO")
+      */
+     private $id;
 
-class Pedido {
+     /**
+      * @ManyToOne(targetEntity="Cliente", cascade={"persist"})
+      * @JoinColumn(name="cliente_id", referencedColumnName="id")
+      */
+     private $cliente;
 
-	/**
- * @Id
- * @GeneratedValue
- * @Column(type="integer")
- */
-	private $id;
+     /**
+      * @ManyToOne(targetEntity="Contrato", cascade={"persist"})
+      * @JoinColumn(name="contrato_id", referencedColumnName="id")
+      */
+      private $contrato;
 
-	/** @ManyToOne(targetEntity="cliente") */
-	private $cliente;
+     /** 
+      * @Column(type="date") 
+      */
+     private $data;
 
-	/** @Column(type="date") */
-	private $data;
-
-	/**
-     * @ManyToOne(targetEntity="contrato")
+     /**
+      * @OneToMany(targetEntity="Historico", mappedBy="pedido")
      */
-	private $contrato;
+    private $historicos;
 
-	/** @OneToMany(targetEntity="historico", mappedBy="pedido", cascade={"remove", "persist"})*/
-	private $historicos;
-
-	/** @OneToMany(targetEntity="item", mappedBy="pedido", cascade={"remove", "persist"})*/
+     /** @OneToMany(targetEntity="Item", mappedBy="pedido")*/
 	private $itens;
 
-	public function __construct()
-	{
-		$this->historicos = new ArrayCollection();
-		$this->itens      = new ArrayCollection();
-	}
+     public function __construct() 
+     {
+          $this->historicos = new ArrayCollection();
+          $this->itens      = new ArrayCollection();
+     }
 
-	public function getId()
-	{
+	public function getId(){
 		return $this->id;
 	}
 
-	public function setId($id) : self
-	{
-		$this->id = $id;
-		return $this->id;
-	}
-
-	public function getCliente() : Cliente
-	{
+	public function getCliente(){
 		return $this->cliente;
 	}
 
-	public function setCliente(Cliente $cliente)
-	{
-		$this->cliente = $cliente;
-		return $this;
-	}
-
-	public function getContrato() : Contrato
-	{
+	public function setContrato($contrato) {
+		$this->contrato = $contrato;
+     }
+     
+     public function getContrato(){
 		return $this->contrato;
 	}
 
-	public function setContrato(Contrato $contrato) : self
-	{
-		$this->contrato = $contrato;
-		return $this;
+	public function setCliente($cliente) {
+		$this->cliente = $cliente;
 	}
 
 	public function getData()
@@ -90,25 +83,26 @@ class Pedido {
 		$this->data = $data;
 		return $this;
 	}
+     
+     public function addHistorico(Historico $historico) : self
+     {
+          $this->historicos->add($historico);
+          $historico->setPedido($this);
+          return $this;
+     }
 
-	public function addHistorico(Historico $historico) : self
-	{
-		$this->historicos->add($historico);
-		return $this;
-	}
+     public function getHistoricos() : Collection
+     {
+          return $this->historicos;
+     }
 
-	public function getHistoricos() : Collection
-	{
-		return $this->historicos;
-	}
-
-	public function getUltimoHistorico() : Historico
+     public function getUltimoHistorico() : Historico
 	{
 		foreach ($this->historicos as $historico);
 		return $historico;
 	}
 
-	public function addItem(Item $item) : self
+     public function addItem(Item $item) : self
 	{
 		$this->itens->add($item);
 		return $this;
@@ -119,7 +113,7 @@ class Pedido {
 		return $this->itens;
 	}
 
-	public function valorTotalPedido() : float
+     public function valorTotalPedido() : float
 	{
 		$total = 0.00;
 		foreach ($this->getItens() as $item) {

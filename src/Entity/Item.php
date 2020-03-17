@@ -22,7 +22,7 @@ class Item
 	private $pedido;
 
 	/**
-     * @ManyToOne(targetEntity="produto")
+     * @ManyToOne(targetEntity="Produto")
      */
 	private $produto;
 

@@ -18,4 +18,4 @@ $Contrato = new Contrato();
 $Contrato->setDescricao('BEMACASH COMERCIO NFC-e + IMPRESSORA + GAVETA + LEITOR');
 $entityManager->persist($Contrato);
 $entityManager->flush();
-echo $Contrato->getId();
+echo $Contrato->getId().PHP_EOL;

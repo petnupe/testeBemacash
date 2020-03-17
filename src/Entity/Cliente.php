@@ -1,5 +1,4 @@
 <?php
-
 namespace Bemacash\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,89 +8,94 @@ use Doctrine\Common\Collections\Collection;
  * @Entity
  */
 
-class Cliente
+class Cliente 
 {
-	/**
-     * @Id
-     * @GeneratedValue
-     * @Column (type="integer")
-     */
-	private $id;
+    /**
+    * @Id
+    * @Column(type="integer")
+    * @GeneratedValue(strategy="AUTO")
+    */
+     private $id;
 
-	/** @Column(type="string") */
-	private $nome;
+     /**
+      * @Column(type="string")
+      */
+     private $nome;
+     
+     /**
+      * @Column(type="string")
+      */
+     private $email;
 
-	/** @Column(type="string", unique=true);  */
-	private $email;
+     /** @Column(type="string"); */
+     private $password;
 
-	/** @Column(type="string"); */
-	private $password;
-
-	/** @OneToMany(targetEntity="pedido", mappedBy="cliente", cascade={"remove", "persist"})*/
-	private  $pedidos;
-
-	/**
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $cnpj;
+     private $cnpj;
 
-	/**
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $uf;
+     private $uf;
 
-	/**
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $endereco;
-	/**
+     private $endereco;
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $pais;
+     private $pais;
 
-	/**
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $cep;
+     private $cep;
 
-	/**
+     /**
      * @Column(type="string", nullable=true)
      */
-	private $telefone;
+     private $telefone;
 
-	public function __construct()
-	{
-		$this->pedidos = new ArrayCollection();
-	}
 
-	public function getId() : int
-	{
-		return $this->id;
-	}
+     /**
+      * @OneToMany(targetEntity="Pedido", mappedBy="cliente")
+     */
+     private $pedidos;
 
-	public function getNome () : string
-	{
-		return $this->nome;
-	}
+     public function __construct()
+     {
+          $this->pedidos = new ArrayCollection();          
+     }
 
-	public function setNome($nome) : self
-	{
-		$this->nome = $nome;
-		return $this;
-	}
+     public function getId()
+     {
+          return $this->id;
+     }
 
-	public function getEmail () : string
-	{
-		return $this->email;
-	}
+     public function getNome()
+     {
+          return $this->nome;
+     }
 
-	public function setEmail($email) : self
-	{
-		$this->email = $email;
-		return $this;
-	}
+     public function setNome($nome)
+     {
+          $this->nome = $nome;
+     }
 
-	public function getPassword () : string
+     public function getEmail()
+     {
+          return $this->email;
+     }
+
+     public function setEmail($email)
+     {
+          $this->email = $email;
+     }
+
+     public function getPassword () : string
 	{
 		return $this->password;
 	}
@@ -105,18 +109,6 @@ class Cliente
 	public function verificaSenha(string $senhaPura)
 	{
 		return password_verify($senhaPura, $this->password);
-	}
-
-	public function addPedido(Pedido $pedido) : self
-	{
-		$this->pedidos->add($pedido);
-		$pedido->setCliente($this);
-		return $this;
-	}
-
-	public function getPedidos() : Collection
-	{
-		return $this->pedidos;
 	}
 
 	public function getCnpj() : string
@@ -183,5 +175,17 @@ class Cliente
 	{
 		$this->telefone = $telefone;
 		return $this;
-	}
+     }
+     
+     public function addPedido(Pedido $pedido) : self
+     {
+          $this->pedidos->add($pedido);
+          $pedido->setCliente($this);
+          return $this;
+     }
+
+     public function getPedidos() : Collection
+     {
+          return $this->pedidos;
+     }
 }

@@ -5,7 +5,7 @@ function teste(idPedido) {
 	    var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("divPedido"+idPedido).innerHTML = this.responseText;
+			 document.getElementById("divPedido"+idPedido).innerHTML = this.responseText;
             }
         };
         xmlhttp.open("GET", "/DetalhePedido?idPedido=" + idPedido, true);
@@ -14,7 +14,7 @@ function teste(idPedido) {
 </script>
 
 <div class="container-fluid mb-5">
-	<?php foreach($pedidosList as $pedido): ?>
+	<?php foreach($pedidosList as $pedido):  ?>
 		<li class="list-group-item list-group-item-success mt-4">
 			<div class="row">
 				<div class="col-9">
@@ -43,11 +43,11 @@ function teste(idPedido) {
 					<?= $pedido->getUltimoHistorico()->getData(); ?>
 				</div>
 				<div class="col">
-					<?= $pedido->getUltimoHistorico()->getStatus()->getDescricao(); ?>
+					<?= $pedido->getUltimoHistorico()->getStatus(); ?>
 				</div>
 			</div>
 		</li>
 	<div id="divPedido<?= $pedido->getId(); ?>"></div>
- 	<?php endforeach; ?>
+	<?php endforeach; ?>
 </div>
 <?php include __DIR__ . '/../fim-html.php'; ?>

@@ -11,14 +11,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $entityManager = (new EntityManagerFactory)->getEntityManager();
 $repoPedidos = $entityManager->getRepository(Pedido::class);
-$repoStatus  = $entityManager->getRepository(Status::class);
+$repoStatus  = array_map('mb_strtoupper', ['aberto', 'faturado', 'finalizado','cancelado']);;
 
 $pedidos = $repoPedidos->findAll();
 
 foreach ($pedidos as $pedido) {
     for($i = 1; $i < 5; $i++) {
         $Historico = new Historico();
-        $Historico->setStatus($repoStatus->find(rand(1, 4)));
+        $Historico->setStatus($repoStatus[rand(0, 3)]);
         $Historico->setPedido($pedido);
         
         $data = new DateTime(date('d-m-Y'));

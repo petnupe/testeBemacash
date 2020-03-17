@@ -3,6 +3,7 @@
 namespace Bemacash\Controller;
 
 use Bemacash\Controller\InterfaceControladorRequisicao;
+use Bemacash\Entity\Historico;
 use Bemacash\Entity\Pedido;
 use Bemacash\Helper\EntityManagerFactory;
 
@@ -14,11 +15,11 @@ class ListarPedidos implements InterfaceControladorRequisicao
 	{
 		$entityManager = (new EntityManagerFactory())->getEntityManager();
 		$this->repositorioPedidos = $entityManager->getRepository(Pedido::class);
+		$this->repoHistoricos = $entityManager->getRepository(Historico::class);
 	}
 
 	public function processaRequisicao() : void
 	{
-
 		if(@$_GET['id']) {
 			$pedidosList = $this->repositorioPedidos->findBy(['cliente' => $_GET['id']]);
 

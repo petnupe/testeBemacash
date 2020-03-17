@@ -33,7 +33,7 @@
 		</div>
 		<div class="col">
 			<h6 class="badge badge badge-warning">
-				<?= $pedido->getUltimoHistorico()->getStatus()->getDescricao();?>
+			<?= $pedido->getUltimoHistorico()->getStatus(); ?>
 			</h6>
 		</div>
 	</div>
